@@ -1,0 +1,5 @@
+C:\Uniwercity\ExpertSystem\ExpertSystem\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Uniwercity\ExpertSystem\ExpertSystem\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Uniwercity\ExpertSystem\ExpertSystem\bin\roslyn\System.Collections.Immutable.dll
+C:\Uniwercity\ExpertSystem\ExpertSystem\bin\roslyn\System.Reflection.Metadata.dll
+C:\Uniwercity\ExpertSystem\ExpertSystem\bin\roslyn\VBCSCompiler.exe

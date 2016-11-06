@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ExpertSystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Countries">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="CountryName" Type="nvarchar(max)" />
+          <Property Name="PartOfTheWorldEnum" Type="int" />
+          <Property Name="IsSafetyCountry" Type="bit" />
+          <Property Name="CrimeLevel" Type="int" />
+          <Property Name="EconomicLevel" Type="int" />
+          <Property Name="Environmental" Type="int" />
+        </EntityType>
+        <EntityType Name="Hotels">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="HotelName" Type="nvarchar(max)" />
+          <Property Name="StarNumber" Type="int" />
+          <Property Name="CountryId" Type="int" />
+        </EntityType>
+        <Association Name="FK_Countries_Countries">
+          <End Role="Countries" Type="Self.Countries" Multiplicity="1" />
+          <End Role="Countries1" Type="Self.Countries" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Countries">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Countries1">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ExpertSystemModelStoreContainer">
+          <EntitySet Name="Countries" EntityType="Self.Countries" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Hotels" EntityType="Self.Hotels" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Countries_Countries" Association="Self.FK_Countries_Countries">
+            <End Role="Countries" EntitySet="Countries" />
+            <End Role="Countries1" EntitySet="Countries" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ExpertSystemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="CountryName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PartOfTheWorldEnum" Type="Int32" />
+          <Property Name="IsSafetyCountry" Type="Boolean" />
+          <Property Name="CrimeLevel" Type="Int32" />
+          <Property Name="EconomicLevel" Type="Int32" />
+          <Property Name="Environmental" Type="Int32" />
+          <NavigationProperty Name="Countries1" Relationship="ExpertSystemModel.FK_Countries_Countries" FromRole="Country" ToRole="Country1" />
+          <NavigationProperty Name="Country1" Relationship="ExpertSystemModel.FK_Countries_Countries" FromRole="Country1" ToRole="Country" />
+        </EntityType>
+        <EntityType Name="Hotel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="HotelName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StarNumber" Type="Int32" />
+          <Property Name="CountryId" Type="Int32" />
+        </EntityType>
+        <EntityContainer Name="ExpertSystemEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Countries" EntityType="Self.Country" />
+          <EntitySet Name="Hotels" EntityType="Self.Hotel" />
+          <AssociationSet Name="FK_Countries_Countries" Association="ExpertSystemModel.FK_Countries_Countries">
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="Country1" EntitySet="Countries" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="FK_Countries_Countries">
+          <End Type="ExpertSystemModel.Country" Role="Country" Multiplicity="1" />
+          <End Type="ExpertSystemModel.Country" Role="Country1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Country1">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ExpertSystemModelStoreContainer" CdmEntityContainer="ExpertSystemEntities1">
+          <EntitySetMapping Name="Countries">
+            <EntityTypeMapping TypeName="ExpertSystemModel.Country">
+              <MappingFragment StoreEntitySet="Countries">
+                <ScalarProperty Name="Environmental" ColumnName="Environmental" />
+                <ScalarProperty Name="EconomicLevel" ColumnName="EconomicLevel" />
+                <ScalarProperty Name="CrimeLevel" ColumnName="CrimeLevel" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CountryName" ColumnName="CountryName" />
+                <ScalarProperty Name="PartOfTheWorldEnum" ColumnName="PartOfTheWorldEnum" />
+                <ScalarProperty Name="IsSafetyCountry" ColumnName="IsSafetyCountry" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Hotels">
+            <EntityTypeMapping TypeName="ExpertSystemModel.Hotel">
+              <MappingFragment StoreEntitySet="Hotels">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="HotelName" ColumnName="HotelName" />
+                <ScalarProperty Name="StarNumber" ColumnName="StarNumber" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

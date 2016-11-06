@@ -1,0 +1,76 @@
+﻿@model List<Country>
+@{
+    ViewBag.Title = "Countries";
+    var random = new Random();
+    int numberHotels;
+}
+
+<h2>Countries</h2>
+@foreach (var country in Model)
+{
+    {
+        numberHotels = random.Next(150, 200);
+    }
+
+    <h3>@country.CountryName </h3>
+    <div> Criminal level:</div>
+    for (var i = 0; i < 10; i++)
+    {
+        if (country.CrimeLevel > i)
+        {
+            <span class="glyphicon glyphicon-star" style="color:red"></span>
+        }
+        else
+        {
+            <span class="glyphicon glyphicon-star-empty" style="color:grey"></span>
+        }
+    }
+
+    <div>Economic level:</div>
+    for (var i = 0; i < 10; i++)
+    {
+        if (country.EconomicLevel > i)
+        {
+            <span class="glyphicon glyphicon-star" style="color:dodgerblue"></span>
+        }
+        else
+        {
+            <span class="glyphicon glyphicon-star-empty" style="color:grey"></span>
+        }
+    }
+
+    <div>Environmental:</div>
+    for (var i = 0; i < 10; i++)
+    {
+        if (country.Environmental > i)
+        {
+            <span class="glyphicon glyphicon-star" style="color:dodgerblue"></span>
+        }
+        else
+        {
+            <span class="glyphicon glyphicon-star-empty" style="color:grey"></span>
+        }
+    }
+
+    <div>Summary:</div>
+    var level = country.EconomicLevel + country.Environmental - country.CrimeLevel;
+    for (var i = 0; i < 10; i++)
+    {
+        if(level > i)
+        {
+                <span class="glyphicon glyphicon-star" style="color:green"></span>
+             }
+        else
+        {
+            <span class="glyphicon glyphicon-star-empty" style="color:grey"></span>
+        }
+        }
+
+
+    <div>(Available hotels: <b>@numberHotels</b>)</div>
+    <div>5 star - @random.Next(10, 30)</div>
+    <div>4 star - @random.Next(50, 80)</div>
+    <div>3 star - @random.Next(80, 100)</div>
+
+        }
+

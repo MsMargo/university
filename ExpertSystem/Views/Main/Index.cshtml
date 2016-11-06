@@ -1,0 +1,17 @@
+﻿@model PartOfTheWorldModel
+@using ExpertSystem.Models
+@{
+    ViewBag.Title = "Vacation helper";
+}
+
+<h2>Vacation Helper</h2>
+
+<h3>Hello, guest!</h3><br/>
+<h4>Please select where you want will spend your vacation</h4>
+
+@using (Html.BeginForm())
+{
+    @Html.EditorFor(x => x.PartOfTheWorld, "RadioButtonListEnum")
+
+     <input type="submit"value="Next"/>
+}
